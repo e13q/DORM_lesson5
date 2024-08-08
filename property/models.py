@@ -83,11 +83,15 @@ class Owner(models.Model):
     full_name = models.CharField(
         'ФИО владельца',
         max_length=200,
+        db_index=True,
         blank=True,
         null=True
     )
     pure_phone = PhoneNumberField(
-        verbose_name='Нормализованный номер владельца', blank=True, null=True
+        verbose_name='Нормализованный номер владельца',
+        db_index=True,
+        blank=True,
+        null=True
     )
     phonenumber = models.CharField(
         'Номер владельца', max_length=20, blank=True, null=True
@@ -100,4 +104,4 @@ class Owner(models.Model):
     )
 
     def __str__(self):
-        return f'{self.owner}'
+        return f'{self.full_name}'
