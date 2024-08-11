@@ -42,7 +42,11 @@ class Flat(models.Model):
     has_balcony = models.NullBooleanField('Наличие балкона', db_index=True)
     active = models.BooleanField('Активно-ли объявление', db_index=True)
     who_liked = models.ManyToManyField(
-        User, verbose_name='Кто лайкнул', blank=True)
+        User,
+        verbose_name='Кто лайкнул',
+        blank=True,
+        related_name='liked_flats'
+    )
     construction_year = models.IntegerField(
         'Год постройки здания',
         null=True,
@@ -59,14 +63,16 @@ class Complaint(models.Model):
         on_delete=models.SET_NULL,
         blank=True,
         null=True,
-        verbose_name='Кто жаловался'
+        verbose_name='Кто жаловался',
+        related_name='complaints'
     )
     flat = models.ForeignKey(
         Flat,
         on_delete=models.SET_NULL,
         blank=True,
         null=True,
-        verbose_name='Квартира, на которую пожаловались'
+        verbose_name='Квартира, на которую пожаловались',
+        related_name='complaints'
     )
     text = models.TextField('Текст жалобы', blank=True, null=True)
 
