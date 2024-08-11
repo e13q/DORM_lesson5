@@ -25,6 +25,6 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='flat',
             name='who_liked',
-            field=models.ManyToManyField(blank=True, related_name='flats', to=settings.AUTH_USER_MODEL, verbose_name='Кто лайкнул'),
+            field=models.ManyToManyField(blank=True, related_name='liked_flats', to=settings.AUTH_USER_MODEL, verbose_name='Кто лайкнул'),
         ),
     ]
