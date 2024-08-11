@@ -22,7 +22,10 @@ def normalize_flat_phonenumbers(apps, schema_editor):
             'RU'
         )
         if pnum.is_valid_number(parsed_phonenumber):
-            flat.owner_pure_phone = f'+7{parsed_phonenumber.national_number}'
+            formatted_number = pnum.format_number(
+                parsed_phonenumber, pnum.PhoneNumberFormat.E164
+            )
+            flat.owner_pure_phone = formatted_number
             flat.save()
 
 
