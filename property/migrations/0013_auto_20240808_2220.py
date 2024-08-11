@@ -6,7 +6,10 @@ from django.db import migrations
 def fill_owners(apps, schema_editor):
     Flat = apps.get_model('property', 'Flat')
     Owner = apps.get_model('property', 'Owner')
-    for flat in Flat.objects.all():
+    flats_set = Flat.objects.all()
+    if not flats_set.exists():
+        return None
+    for flat in flats_set.iterator():
         owner_created, created = Owner.objects.get_or_create(
             full_name=flat.owner,
             defaults={

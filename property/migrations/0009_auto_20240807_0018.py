@@ -6,7 +6,10 @@ import phonenumbers as pnum
 
 def normalize_flat_phonenumbers(apps, schema_editor):
     Flat = apps.get_model('property', 'Flat')
-    for flat in Flat.objects.all():
+    flats_set = Flat.objects.all()
+    if not flats_set.exists():
+        return None
+    for flat in flats_set.iterator():
         phonenumber_matched = pnum.PhoneNumberMatcher(
             flat.owners_phonenumber,
             'RU'
